@@ -129,7 +129,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def login(self, player, seed):
-        print('login', self._name, player.pos)
         # ログイン成功
         pk = send.PlayStatus()
         pk.status = pk.LOGIN_SUCCESS
@@ -165,7 +164,6 @@ class Player:
         self.change_chunk_pos(player.pos)
 
     def spawn(self, player, time):
-        print('spawn', self._name, player.pos)
         # 時間設定
         pk = send.SetTime()
         pk.time = time
@@ -227,7 +225,6 @@ class Player:
                 self.send_new_item(entity, Vector(0,0,0))
 
     def send_new_player(self, player):
-        print('send_new_player', self._name, player.name)
         eid = self.to_packet_eid(player.eid)
         v0 = Vector(0,0,0)
         # EntityData
@@ -262,7 +259,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_removed_player(self, eid, public_id):
-        print('send_removed_player', self._name, public_id)
         # RemovePlayer
         pk = send.RemovePlayer()
         pk.eid = eid
@@ -278,7 +274,6 @@ class Player:
     def send_player_equiped(self, eid, held_hotbar, slot, item):
         if eid == self._eid:
             return
-        print('send_player_equiped', self._name)
         pk = both.PlayerEquipment()
         pk.eid = eid
         pk.item = item
@@ -288,13 +283,11 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_updated_block(self, blocks):
-        print('send_updated_block', self._name)
         pk = send.UpdateBlock()
         pk.records = blocks
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_block_entities(self, block_entities):
-        print('send_block_entities', self._name)
         for e in block_entities:
             pk = both.TileEntityData()
             pk.pos = e.pos
@@ -302,7 +295,6 @@ class Player:
             self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_new_item(self, entity, speed):
-        print('send_new_item', self._name)
         pk = send.AddItemEntity()
         pk.eid = entity.eid
         pk.item = entity.item
@@ -312,7 +304,6 @@ class Player:
 
     def send_taken_item(self, entity_eid, player_eid):
         player_eid = self.to_packet_eid(player_eid)
-        print('send_taken_item', self._name)
         # TakeItemEntity
         pk = send.TakeItemEntity()
         pk.player_eid = player_eid
@@ -324,7 +315,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_inventory(self, updated_slot, item):
-        print('send_inventory', self._name)
         pk = both.ContainerSetSlot()
         pk.window_id = ContainerWindowID.INVENTORY
         pk.slot = updated_slot
@@ -332,7 +322,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_container(self, pos, container):
-        print('send_container', self._name)
         # ContainerOpen
         pk = send.ContainerOpen()
         pk.window_id = container.window_id
@@ -348,7 +337,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED, True)
 
     def send_open_event(self, pos_list):
-        print('send_open_event', self._name)
         for pos in pos_list:
             pk = send.TileEvent()
             pk.pos = pos
@@ -357,13 +345,11 @@ class Player:
             self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_closed_container(self, window_id):
-        print('send_closed_container', self._name)
         pk = both.ContainerClose()
         pk.window_id = window_id
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_close_event(self, pos_list):
-        print('send_close_event', self._name)
         for pos in pos_list:
             pk = send.TileEvent()
             pk.pos = pos
@@ -374,7 +360,6 @@ class Player:
     def send_changed_container_slot(self, player_ids, window_id, slot, item):
         if self._client_id not in player_ids:
             return
-        print('send_changed_container_slot', self._name)
         pk = both.ContainerSetSlot()
         pk.window_id = window_id
         pk.slot = slot
@@ -384,7 +369,6 @@ class Player:
     def send_container_data(self, player_ids, window_id, prop):
         if self._client_id not in player_ids:
             return
-        print('send_container_data', self._name)
         for index, value in prop.items():
             pk = send.ContainerSetData()
             pk.window_id = window_id
@@ -396,7 +380,6 @@ class Player:
         motions = list(m for m in motions if m.eid != self._eid)
         if len(motions) == 0:
             return
-        print('send_moved_entity', self._name)
         pk = send.MoveEntity()
         pk.motions = motions
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
@@ -405,7 +388,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
         
     def send_injured_entity(self, eid, health):
-        print('send_injured_entity', self._name)
         eid = self.to_packet_eid(eid)
         if eid == self.OWN_EID:
             pk = send.SetHealth()
@@ -417,7 +399,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_changed_entity(self, eid, meta):
-        print('send_changed_entity', self._name)
         # EntityData
         pk = send.SetEntityData()
         pk.eid = eid
@@ -425,7 +406,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
         
     def send_new_mob(self, entities):
-        print('send_new_mob', self._name)
         for e in entities:
             self._send_new_mob(e)
 
@@ -442,14 +422,12 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_removed_mob(self, eid):
-        print('send_removed_mob', self._name)
         # RemoveEntity
         pk = send.RemoveEntity()
         pk.eid = eid
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_died_entity(self, eid, spawn_pos=None):
-        print('send_died_entity', self._name)
         if eid == self._eid:
             pk = send.Respawn()
             pk.pos = spawn_pos
@@ -467,7 +445,6 @@ class Player:
         self.direct_data_packet(pk, Reliability.RELIABLE_ORDERED)
 
     def send_sound(self, event_id, pos, data):
-        print('send_sound', self._name)
         pk = send.LevelEvent()
         pk.event_id = event_id
         pk.pos = pos

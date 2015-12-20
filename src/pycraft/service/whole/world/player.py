@@ -161,8 +161,7 @@ class PlayerWorld:
                     if hotbar != -1:
                         player.set_hotbar(hotbar, player.HOTBAR_NONE)
             self._mark_changed(player.player_id)
-        except ValueError as e:
-            print(e)
+        except ValueError:
             player.slots.reduce_item(updated_slot)
 
     def attack_entity(self, player, eid):

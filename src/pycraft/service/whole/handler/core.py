@@ -112,10 +112,10 @@ class Handler(network.Handler):
             players_max=config.max_player_num)
 
     def open(self, session):
-        print('open', session)
+        logger.server.info('open session {session}', session=session)
     
     def close(self, session, reason):
-        print('close', session)
+        logger.server.info('close session {session}', session=session)
         if session.addr in self._addr2id:
             player_id = self._addr2id[session.addr]
             player = self._players[player_id]
@@ -148,7 +148,8 @@ class Handler(network.Handler):
             'H> {addr} {packet}', addr=session.addr, packet=pk)
         self._protocol(session).handle(session, pk)
         if len(pk.buffer()) != 0:
-            print('Decode did not conclude.', pk.buffer())
+            logger.server.error(
+                'Decode did not conclude. [{buffer}]', buffer=pk.buffer())
             raise NotImplementedError()
 
     def _handle_batch(self, session, packet):
@@ -158,7 +159,8 @@ class Handler(network.Handler):
                 'H>> {addr} {packet}', addr=session.addr, packet=pk)
             self._protocol(session).handle(session, pk)
             if len(pk.buffer()) != 0:
-                print('Decode did not conclude.', pk.buffer())
+                logger.server.error(
+                    'Decode did not conclude. [{buffer}]', buffer=pk.buffer())
                 raise NotImplementedError()
 
     def _handle_login(self, session, packet):

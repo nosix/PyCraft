@@ -127,7 +127,6 @@ class World:
         # ブロックを生成するアイテムであることを確認する
         block_id = item.to_block(face)
         if block_id == None:
-            print('{item} does not become block.'.format(item=item))
             return
         # ブロックを生成して地形に追加する
         block = new_block(
