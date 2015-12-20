@@ -162,6 +162,8 @@ class MobEntity(LivingEntity):
     name = property(get_name, set_name)
     eye_y = property(lambda self: self.BODY_SIZE.height * 3/4)
     eye_pos = property(lambda self: self.bottom_pos + (0, 0, self.eye_y))
+    motion = property(lambda self:
+        Motion(self.eid, self.pos, self.yaw, self.head_yaw, -self.pitch))
 
     def can_fly(self):
         return False
