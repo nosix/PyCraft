@@ -47,11 +47,19 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
+
+# PyCraft
+.DS_Store
+*~
+*.bak
+*.pyc
+*.txt
+*.log
+*.db
+*.stats
+!doc/*.txt
