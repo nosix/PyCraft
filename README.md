@@ -64,9 +64,9 @@ remote sensor connections は Scratch 2.0 にはありません。
 1. [Scratch 1.4](https://scratch.mit.edu/scratch_1.4/) を用意する
 1. Scratch で remote sensor connections を有効にする
     - sensor value を選んで右クリック
-    - ![enable remote sensor connections](https://raw.github.com/wiki/nosix/PyCraft/doc/remote_sensor_connections.png)
+    - ![enable remote sensor connections](doc/remote_sensor_connections.png)
 1. Scratch が起動している PC の IP アドレスを調べる
-    - ![ipconfig](https://raw.github.com/wiki/nosix/PyCraft/doc/ipconfig.png)
+    - ![ipconfig](doc/ipconfig.png)
 1. PyCraft の設定を変更する
     - `src/pycraft/service/config.py` の `scratch_network` を変更する
         - `192.168.197.149` なので `scratch_network = '192.168.197.0/24'`
@@ -76,7 +76,7 @@ remote sensor connections は Scratch 2.0 にはありません。
     - 接続に成功すると PyCraft を起動した画面に `new scratch agent` と表示されます
     - Scratch には `enabled` がおくられ(broadcast され)ます。
 1. Scratch でプログラムをつくる
-    - ![サンプル](https://raw.github.com/wiki/nosix/PyCraft/doc/scratch_sample.png)
+    - ![サンプル](doc/scratch_sample.png)
     - メッセージがおくられて(broadcast されて)くるときには、
       『センサーのあたい(sensor value)』に値が設定されます
     - メッセージをおくる(broadcast する)ときには、
