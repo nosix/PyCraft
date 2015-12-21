@@ -122,6 +122,10 @@ class MobWorld:
         # スポーンする Mob を決める TODO: 実装する
         factory = [
             monster.Spider,
+            monster.Zombie,
+            monster.Skeleton,
+            monster.Creeper,
+            monster.Enderman,
             animal.Bat,
             animal.Chicken,
             animal.Sheep,

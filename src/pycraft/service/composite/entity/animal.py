@@ -11,6 +11,9 @@ class Chicken(MobEntity):
     TYPE = EntityType.CHICKEN
     STRENGTH = 2
     BODY_SIZE = Size(0.3, 0.3, 0.7)
+    VIEW_DISTANCE = 64
+    VIEW_ANGLE_H = 90
+    VIEW_ANGLE_V = 60
     
     def drop_items(self):
         return [
@@ -25,6 +28,9 @@ class Sheep(MobEntity):
     TYPE = EntityType.SHEEP
     STRENGTH = 4
     BODY_SIZE = Size(0.9, 0.9, 1.3)
+    VIEW_DISTANCE = 96
+    VIEW_ANGLE_H = 90
+    VIEW_ANGLE_V = 30
     
     def drop_items(self):
         return [
@@ -37,6 +43,9 @@ class Wolf(MobEntity):
     TYPE = EntityType.WOLF
     STRENGTH = 4
     BODY_SIZE = Size(0.6, 0.6, 0.8)
+    VIEW_DISTANCE = 128
+    VIEW_ANGLE_H = 30
+    VIEW_ANGLE_V = 20
 
 
 class Villager(MobEntity):
@@ -44,9 +53,9 @@ class Villager(MobEntity):
     TYPE = EntityType.VILLAGER
     STRENGTH = 10
     BODY_SIZE = Size(0.6, 0.6, 1.8)
-    VIEW_DISTANCE = 128
+    VIEW_DISTANCE = 64
     VIEW_ANGLE_H = 60
-    VIEW_ANGLE_V = 20
+    VIEW_ANGLE_V = 30
 
 
 class Bat(MobEntity):
