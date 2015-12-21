@@ -17,6 +17,7 @@ class BlockFactory:
         self._blocks[ID.STONE] = defs.Stone
         self._blocks[ID.GRASS] = defs.Grass
         self._blocks[ID.SAND] = defs.Sand
+        self._blocks[ID.TORCH] = defs.Torch
         self._blocks[ID.CHEST] = defs.Chest
         self._blocks[ID.CRAFTING_TABLE] = defs.CraftingTable
         self._blocks[ID.FURNACE] = defs.Furnace

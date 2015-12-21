@@ -18,7 +18,7 @@ class ChunkRectangular:
 
 class Position(metaclass=ImmutableMeta):
 
-    X_RANGE, Z_RANGE, Y_RANGE = 65536, 65536, 128
+    X_RANGE, Z_RANGE, Y_RANGE = 4294967296, 4294967296, 128
 
     CHUNK_AREA = SpiralChunkArea()
 

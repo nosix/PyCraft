@@ -128,10 +128,14 @@ class World:
         block_id = item.to_block(face)
         if block_id == None:
             return
-        # ブロックを生成して地形に追加する
+        # ブロックを生成する
         block = new_block(
             block_id, attach_face=face,
             player_face=player.face, player_yaw=player.head_yaw)
+        # ブロックを設置できる面を確認する
+        if not block.can_attach_to(face):
+            return
+        # 地形に追加する
         self._terrain.add_block(pos.by_face(face), block)
 
     def make_item(self, player_id, made_item, used_items):

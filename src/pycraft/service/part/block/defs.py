@@ -39,6 +39,26 @@ class Sand(MaterialBlock):
         return True
 
 
+class Torch(MaterialBlock):
+    
+    @classmethod
+    def to_attr(cls, attach_face=0, player_face=None, **kwargs):
+        if player_face != None:
+            return [0,0,4,3,2,1][attach_face]
+
+    @classmethod
+    def is_transparent(cls):
+        return True
+    
+    @classmethod
+    def can_attach(cls):
+        return False
+
+    @classmethod
+    def can_attach_to(cls, face):
+        return face != 0
+
+
 class Chest(MaterialBlock, WithDirection):
     
     @classmethod
@@ -94,6 +114,14 @@ class Furnace(Block, WithDirection):
 class Sign(Block):
     
     @classmethod
+    def can_attach(cls):
+        return False
+
+    @classmethod
+    def can_attach_to(cls, face):
+        return face != 0
+
+    @classmethod
     def get_remove_func(cls, terrain):
         return terrain._remove_sign
 
@@ -137,6 +165,14 @@ class Door(Block):
         # 上段の両開きドア設定
         if 'is_double' in kwargs:
             return 9 if kwargs['is_double'] else 8
+
+    @classmethod
+    def can_attach(cls):
+        return False
+
+    @classmethod
+    def can_attach_to(cls, face):
+        return face == 1
 
     @classmethod
     def get_remove_func(cls, terrain):

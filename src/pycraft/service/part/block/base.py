@@ -35,6 +35,12 @@ class Block(metaclass=ImmutableMeta):
 
     @classmethod
     def can_attach(cls):
+        """他のブロックを設置できるか？"""
+        return True
+
+    @classmethod
+    def can_attach_to(cls, face):
+        """このブロックを面に設置できるか？"""
         return True
 
     @classmethod
