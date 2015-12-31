@@ -59,6 +59,8 @@ Scratch 1.4 には remote sensor connections という機能があります。
 この機能を使い Scratch から Minecraft の生物を操作できるようにしています。
 remote sensor connections は Scratch 2.0 にはありません。
 
+[![demo](http://img.youtube.com/vi/Hf7Aix-HT9k/0.jpg)](http://www.youtube.com/watch?v=Hf7Aix-HT9k)
+
 ### 使用方法
 
 1. [Scratch 1.4](https://scratch.mit.edu/scratch_1.4/) を用意する
