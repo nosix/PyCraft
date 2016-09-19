@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 
+
+from binascii import hexlify as hex
 from pycraft.common import ByteBuffer
 from pycraft.common.util import summary
 
@@ -23,7 +25,7 @@ class Packet:
             summary(k, getattr(self, k)) 
                 for k in self.__slots__ 
                     if not k.startswith('_') and hasattr(self, k))
-        buf = self._buffer.bytes().hex() if self._buffer.is_reading() else ''
+        buf = hex(self._buffer.bytes()) if self._buffer.is_reading() else ''
         return '{name}({attrs}) {buf}'.format(
             name=self.__class__.__name__, attrs=', '.join(attrs), buf=buf)
     
@@ -66,7 +68,7 @@ class StreamRaw(Packet):
     def __str__(self):
         return '{name}({buf})'.format(
             name=self.__class__.__name__,
-            buf=self._buffer.bytes().hex())
+            buf=hex(self._buffer.bytes()))
 
     def decode(self):
         pass

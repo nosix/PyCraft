@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
 
-
 import os
 import socket
 import random
 import queue
 import time
 import selectors
+from binascii import hexlify as hex
 from operator import attrgetter
 from pycraft.common.util import max_int, divide_seq
 from .packet import ID, ctrl, data, appl
@@ -139,7 +139,7 @@ class Server:
         buffer = packet.buffer()
         sock.sendto(buffer, addr)
         logger.packet.debug(
-            '{addr}<{buffer}', addr=addr, buffer=buffer.hex())
+            '{addr}<{buffer}', addr=addr, buffer=hex(buffer))
         logger.server.debug(
             'N< {addr} {packet}', addr=addr, packet=packet)
 
@@ -155,7 +155,7 @@ class Server:
         packet = protocol.net.packet(buffer)
         packet.decode()
         logger.packet.debug(
-            '{addr}>{buffer}', addr=addr, buffer=buffer.hex())
+            '{addr}>{buffer}', addr=addr, buffer=hex(buffer))
         logger.server.debug(
             'N> {addr} {packet}', addr=addr, packet=packet)
         return packet, addr

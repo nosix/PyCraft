@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+from binascii import hexlify as hex
 from pycraft.service.primitive.geometry import Position
 from .base import Packet
 from .ids import ID
@@ -122,7 +123,7 @@ class MakeItem(Packet):
         super().decode()
         self.unknown1 = self._buffer.next_byte()
         self.unknown2 = self._buffer.next_int()
-        self.recipe_id = self._buffer.next(16).hex()
+        self.recipe_id = hex(self._buffer.next(16))
         self.material_items = list(
             self._buffer.next_item() for _ in range(self._buffer.next_int()))
         self.product_items = list(

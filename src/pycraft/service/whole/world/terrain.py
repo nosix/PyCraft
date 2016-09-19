@@ -247,8 +247,9 @@ class Terrain:
                 (Position(bottom.x, bottom.z, bottom.y), 0))
         
     def _update_block(self, pos, block):
+        pos_in_chunk = pos.in_chunk
         chunk = self._cache[pos.chunk_pos]
-        chunk.set_block(*pos.in_chunk, block)
+        chunk.set_block(pos_in_chunk.x, pos_in_chunk.z, pos_in_chunk.y, block)
         self._mark_updated(chunk.pos)
         return BlockRecord(
             pos.x, pos.z, pos.y, block.id, block.attr,

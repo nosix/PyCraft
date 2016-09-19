@@ -7,10 +7,11 @@ from pycraft.common.immutable import ImmutableMeta
 class Endian:
     """LittleEndian, BigEndian を扱う
     
-    >>> Endian.LITTLE.pack('h', 1).hex()
-    '0100'
-    >>> Endian.BIG.pack('h', 1).hex()
-    '0001'
+    >>> from binascii import hexlify as hex
+    >>> hex(Endian.LITTLE.pack('h', 1))
+    b'0100'
+    >>> hex(Endian.BIG.pack('h', 1))
+    b'0001'
     >>> Endian.LITTLE.unpack('h', bytearray.fromhex('0100'))
     1
     >>> Endian.BIG.unpack('h', bytearray.fromhex('0001'))
@@ -44,6 +45,7 @@ class Endian:
 class ByteBuffer:
     """bytearray を操作する
     
+    >>> from binascii import hexlify as hex
     >>> buf = ByteBuffer()
     >>> buf.put_str('abcde')
     >>> buf.put_byte(1)
@@ -52,8 +54,8 @@ class ByteBuffer:
     >>> buf.put_float(4.0)
     >>> buf.put_addr(('192.168.0.1', 80))
     >>> b = buf.bytes()
-    >>> b.hex()
-    '00056162636465010200000000000340800000043f57fffe0050'
+    >>> hex(b)
+    b'00056162636465010200000000000340800000043f57fffe0050'
     >>> buf = ByteBuffer(b)
     >>> buf.next_str()
     'abcde'

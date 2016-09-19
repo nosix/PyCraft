@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+from binascii import hexlify as hex
 from pycraft.common.util import product
 from pycraft.service.primitive.geometry import ChunkRectangular
 from pycraft.service.primitive.values import Color
@@ -59,7 +60,7 @@ class Chunk:
 
     def __str__(self):
         return '{name}{pos}[{data}]'.format(
-            name=self.__class__.__name__, pos=self._pos, data=self._data.hex())
+            name=self.__class__.__name__, pos=self._pos, data=hex(self._data))
 
     pos = property(lambda self: self._pos)
     data = property(lambda self: bytes(self._data))

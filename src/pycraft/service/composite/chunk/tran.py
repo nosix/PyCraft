@@ -57,6 +57,6 @@ class ChunkTransaction:
         if self._has_error:
             return
         for pos, value in self._update_block_id.items():
-            self._chunk.set_block_id(*pos, value)
+            self._chunk.set_block_id(pos.x, pos.z, pos.y, value)
         for pos, value in self._update_block_data.items():
-            self._chunk.set_block_data(*pos, value)
+            self._chunk.set_block_data(pos.x, pos.z, pos.y, value)

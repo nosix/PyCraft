@@ -3,6 +3,7 @@
 import socket
 import selectors
 import functools
+from binascii import hexlify as hex
 
 
 class Client:
@@ -46,7 +47,7 @@ class Client:
             return (key.data(key.fileobj)
                 for key, _ in recv_selector.select(timeout))
         def handle_recv_packet(sock):
-            return sock.recv(4096).hex()
+            return hex(sock.recv(4096))
         recv_selector.register(
             self._sock, selectors.EVENT_READ, handle_recv_packet)
         recv_buffer = self._recv_buffer(recv)
@@ -65,7 +66,7 @@ class Client:
                     for _ in range(3):
                         yield n & 0xFF
                         n >>= 8
-                seq_num = bytes(b for b in triad()).hex()
+                seq_num = hex(bytes(b for b in triad()))
                 buffer = buffer[0:2] + seq_num + buffer[8:]
                 self._num_of_data_packet += 1
             send_func(buffer)

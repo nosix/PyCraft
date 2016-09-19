@@ -3,6 +3,7 @@
 import io
 import re
 import sys
+from binascii import hexlify as hex
 from collections import defaultdict
 from pycraft.network import packet_classes
 from pycraft.network.container import SplitPacketContainer
@@ -88,7 +89,7 @@ class Session:
         if isinstance(value, set) or isinstance(value, list):
             return self._analyze_list(inout, value)
         if isinstance(value, bytes):
-            return value.hex()
+            return hex(value)
         if isinstance(value, EncapPacket):
             return self._analyze_encapsulated_packet(inout, value)
         if isinstance(value, Item) or isinstance(value, MetaData):
@@ -108,13 +109,13 @@ class Session:
             data['_order'] = getattr(packet, 'order')
         if getattr(packet, 'split') != None:
             data['_split'] = getattr(packet, 'split')
-        buffer = packet.buffer.hex()
+        buffer = hex(packet.buffer)
         self._update_meta(data, inout, packet, buffer)
         if packet.split:
             packet = self._split_packets[inout].concat(packet)
             if packet == None:
                 return data
-        buffer = packet.buffer.hex()
+        buffer = hex(packet.buffer)
         packet = protocol.app.packet(bytes.fromhex(buffer))
         if not isinstance(packet, StreamRaw):
             self._decode_packet(packet, buffer, inout, 'NetworkPacket')
@@ -140,7 +141,7 @@ class Session:
 
     def _analyze_batch(self, inout, payload):
         data = {}
-        buffer = payload.hex()
+        buffer = hex(payload)
         packet = protocol_serv.packet(bytes.fromhex(buffer))
         if isinstance(packet, StreamRaw):
             self._update_meta(data, inout, packet, buffer)
@@ -157,7 +158,7 @@ class Session:
             packet.decode()
             assert len(packet.buffer()) == 0
         except Exception as e:
-            print(packet.__class__.__name__, '%r' % e, packet.buffer().hex())
+            print(packet.__class__.__name__, '%r' % e, hex(packet.buffer()))
             print(kind, inout, buffer)
             raise DecodeException()
 

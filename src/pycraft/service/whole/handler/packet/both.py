@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 import zlib
+from binascii import hexlify as hex
 from .base import Packet
 from .ids import ID
 from pycraft.common.buffer import ByteBuffer
@@ -247,4 +248,4 @@ class Unknown3(Packet):
     def decode(self):
         super().decode()
         self.eid = self._buffer.next_long()
-        self.unknown = self._buffer.next().hex()
+        self.unknown = hex(self._buffer.next())

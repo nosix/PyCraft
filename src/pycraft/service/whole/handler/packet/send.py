@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+from binascii import hexlify as hex
 from pycraft.service.primitive.geometry import ChunkPosition
 from pycraft.service.primitive.values import BlockRecord
 from pycraft.service.part.recipe import recipe_data
@@ -208,7 +209,7 @@ class AddPlayer(Packet):
 
     def _next_player(self):
         return dict(
-            public_id = self._buffer.next(16).hex(),
+            public_id = hex(self._buffer.next(16)),
             eid = self._buffer.next_long(),
             user_name = self._buffer.next_str(),
             skin_name = self._buffer.next_str(),
@@ -691,7 +692,7 @@ class Unknown1(Packet):
     
     def _next(self):
         unknown1 = self._buffer.next_int()
-        unknown2 = self._buffer.next(8).hex()
+        unknown2 = hex(self._buffer.next(8))
         unknown3 = self._buffer.next_str()
         return unknown1, unknown2, unknown3
 
@@ -718,7 +719,7 @@ class RecipeData(Packet):
             count = self._buffer.next_int()
             product_items = list(
                 self._buffer.next_item() for _ in range(count))
-            recipe_id = self._buffer.next(16).hex()
+            recipe_id = hex(self._buffer.next(16))
             return (kind, unknown, material_items, product_items, recipe_id)
         if kind == 1:
             unknown = self._buffer.next_int()
@@ -729,7 +730,7 @@ class RecipeData(Packet):
             count = self._buffer.next_int()
             product_items = list(
                 self._buffer.next_item() for _ in range(count))
-            recipe_id = self._buffer.next(16).hex()
+            recipe_id = hex(self._buffer.next(16))
             return (
                 kind, unknown, rows, cols,
                     material_items, product_items, recipe_id)
@@ -740,10 +741,10 @@ class RecipeData(Packet):
             return (kind, unknown1, unknown2, item)
         if kind == 3:
             unknown1 = self._buffer.next_int()
-            unknown2 = self._buffer.next(11).hex()
+            unknown2 = hex(self._buffer.next(11))
             return (kind, unknown1, unknown2)
         if kind == 5:
-            unknown1 = self._buffer.next(20).hex()
+            unknown1 = hex(self._buffer.next(20))
             return (kind, unknown1)
 
     def encode(self):
