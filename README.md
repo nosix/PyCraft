@@ -13,6 +13,7 @@ Support version:
 1. Python 3.5 をインストールする
 1. PyCraft を展開する
 1. `$ cd PyCraft`
+1. `$ export PYTHONPATH=src`
 1. `$ python3.5 src/pycraft/main.py` を実行する
     - `bash` では `$ source bashrc` とした後に `$ pycraft` とすれば起動します。
 
