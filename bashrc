@@ -1,13 +1,14 @@
 #!/bin/bash
 
+PYTHON=python3
 SCRIPT_DIR=$(cd $(dirname $BASH_SOURCE); pwd)
 
 export PYTHONPATH=$SCRIPT_DIR/src:$SCRIPT_DIR/test
 
-PYCRAFT="python $SCRIPT_DIR/src/pycraft/main.py"
-ANALYZER="python $SCRIPT_DIR/src/pycraft/client/analyzer.py"
-TSHARK2PYCRAFT="python $SCRIPT_DIR/src/pycraft/client/tshark2pycraft.py"
-TEST_GENERATOR="python $SCRIPT_DIR/test/pycraft_test/util/generator.py"
+PYCRAFT="$PYTHON $SCRIPT_DIR/src/pycraft/main.py"
+ANALYZER="$PYTHON $SCRIPT_DIR/src/pycraft/client/analyzer.py"
+TSHARK2PYCRAFT="$PYTHON $SCRIPT_DIR/src/pycraft/client/tshark2pycraft.py"
+TEST_GENERATOR="$PYTHON $SCRIPT_DIR/test/pycraft_test/util/generator.py"
 
 alias pycraft="$PYCRAFT"
 alias analyze="$ANALYZER > packet.txt"
