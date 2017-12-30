@@ -1,6 +1,9 @@
 # PyCraft
 Multiplay server of Minecraft Pocket Edition
 
+__I plan to replace this project with [PyMineHub](https://github.com/nosix/PyMineHub).
+PyMineHub will be working with Raspberry Pi.__
+
 Support version:
 - Python 3.5
 - Minecraft Pocket Edition 0.13.1
